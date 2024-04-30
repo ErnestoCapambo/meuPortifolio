@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model about {
+  id         Int       @id                       @default(autoincrement())
+  paragraph1 String    @db.VarChar(1500)
+  paragraph2 String    @db.VarChar(1500)
+  created_at DateTime? @default(now()) @db.DateTime(0)
+  User_id    String
+  user       user      @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_About_User1")
+
+  @@index([User_id], map: "fk_About_User1_idx")
+}
+
+model especiality {
+  id          Int       @unique(map: "id_UNIQUE") @default(autoincrement())
+  name        String    @db.VarChar(45)
+  description String?   @db.VarChar(500)
+  img_path    String?   @db.VarChar(200)
+  created_at  DateTime? @default(now()) @db.DateTime(0)
+  User_id     String
+  user        user      @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Especiality_User1")
+
+  @@id([id, User_id])
+  @@index([User_id], map: "fk_Especiality_User1_idx")
+}
+
+model maintitle {
+  id          Int    @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  title       String @db.VarChar(200)
+  description String @db.VarChar(500)
+  User_id     String
+  user        user   @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Maintitle_User1")
+
+  @@index([User_id], map: "fk_Maintitle_User1_idx")
+}
+
+model mensage {
+  id               Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  costumer_name    String    @db.VarChar(50)
+  costumer_email   String    @db.VarChar(150)
+  costumer_contact String?   @db.VarChar(45)
+  description      String    @db.LongText
+  created_at       DateTime? @default(now()) @db.DateTime(0)
+  seen             Int?      @default(0) @db.TinyInt
+}
+
+model project {
+  id          Int       @id @unique(map: "id_UNIQUE")       @default(autoincrement())
+  file_path   String?   @db.VarChar(200)
+  description String    @db.VarChar(500)
+  created_at  DateTime? @default(now()) @db.DateTime(0)
+  updated_at  DateTime? @default(now()) @db.DateTime(0)
+  User_id     String
+  user        user      @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Project_User")
+
+  @@index([User_id], map: "fk_Project_User_idx")
+}
+
+model user {
+  id          String        @id @unique(map: "id_UNIQUE")     @default(uuid())
+  username    String        @db.VarChar(55)
+  email       String        @unique(map: "email_UNIQUE")      @db.VarChar(150)
+  password    String        @db.VarChar(50)
+  contact     String?       @db.VarChar(45)
+  image_path  String?       @db.VarChar(200)
+  about       about[]
+  especiality especiality[]
+  maintitle   maintitle[]
+  project     project[]
+}
