@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/server/server.js",
     "dev": "tsx watch src/server/server.ts",
-    "build": "tsup src"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,8 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/multer": "^1.4.11",
     "@types/node": "^20.12.7",
-    "tsx": "^4.7.3"
+    "tsx": "^4.7.3",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",
@@ -26,6 +27,7 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
+    "tsc": "^2.0.4",
     "tsup": "^8.0.2"
   }
 }
