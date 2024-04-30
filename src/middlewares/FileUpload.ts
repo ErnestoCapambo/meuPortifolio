@@ -1,7 +1,7 @@
 import multer from 'multer'
 import path from 'path'
 
-const uploadsFolder = path.resolve('./uploads')
+const uploadsFolder = path.resolve('../uploads')
 
 const storage = multer.diskStorage({
     destination: uploadsFolder,
