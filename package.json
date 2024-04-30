@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/server/server.js",
     "dev": "tsx watch src/server/server.ts",
-    "build": "tsup"
+    "build": "tsup src"
   },
   "keywords": [],
   "author": "",
