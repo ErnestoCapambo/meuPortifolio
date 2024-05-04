@@ -6,7 +6,7 @@ export async function getUser(req: Request, res: Response) {
     res.header('Access-Control-Allow-Origin', '*')
     try {
         const { userId } = req.params
-        verifyUser(req, res, async() => {
+        // verifyUser(req, res, async() => {
             if (!userId) {
                 const user = await prisma.user.findMany()
                 return res.status(200).json(user)
@@ -15,7 +15,7 @@ export async function getUser(req: Request, res: Response) {
                 where: { id: userId }
             })
             return res.status(200).json(user)
-        })
+        // })
     } catch (err: any) {
         return res.status(500).json(err)
     }
