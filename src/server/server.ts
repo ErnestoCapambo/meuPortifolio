@@ -28,21 +28,21 @@ app.use("/about", AboutRoutes)
 app.use("/mensages", MensageRoutes)
 
 const port = process.env.PORT
-// const defaultUuid = 'adfd4633-1c05-4a13-b038-98db30f64e12'
+const defaultUuid = 'adfd4633-1c05-4a13-b038-98db30f64e12'
 
 app.listen(port ?? 1500, async() => {
-    // const verifyUser = await prisma.user.count()
-    // if (verifyUser == 0) {
-    //     const defaultUser = await prisma.user.create({
-    //         data: {
-    //             id: defaultUuid,
-    //             username: 'Ernesto Capambo',
-    //             email: 'ernestosikilitacapambo@gmail.com',
-    //             contact: '957053820',
-    //             password: 'python.org777'
-    //         }
-    //     })
-    // }
+    const verifyUser = await prisma.user.count()
+    if (verifyUser == 0) {
+        const defaultUser = await prisma.user.create({
+            data: {
+                id: defaultUuid,
+                username: 'Ernesto Capambo',
+                email: 'ernestosikilitacapambo@gmail.com',
+                contact: '957053820',
+                password: 'python.org777'
+            }
+        })
+    }
     if (port !== undefined) {
         console.log(`Server running at port ${port}`) 
     } else {
