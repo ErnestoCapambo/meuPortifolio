@@ -4,12 +4,12 @@ import { prisma } from "../lib/Prisma";
 export async function getEspecialitytImg(req: Request, res: Response) {
     res.header('Access-Control-Allow-Origin', '*')
     try {
-        const { rpecialityId } = req.params
-        if (!rpecialityId) {
+        const { especialityId } = req.params
+        if (!especialityId) {
             return res.status(406).json({error: 'Especiality id is required!'})
         }
         const especiality = await prisma.especiality.findUnique({
-            where: { id: Number(rpecialityId) }
+            where: { id: Number(especialityId) }
         })
         if (especiality !== null) {
             return res.status(200).sendFile(String(especiality?.img_path))
