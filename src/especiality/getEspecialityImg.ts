@@ -6,7 +6,7 @@ export async function getEspecialitytImg(req: Request, res: Response) {
     try {
         const { rpecialityId } = req.params
         if (!rpecialityId) {
-            return res.status(406).json({error: 'User id is required!'})
+            return res.status(406).json({error: 'Especiality id is required!'})
         }
         const especiality = await prisma.especiality.findUnique({
             where: { id: Number(rpecialityId) }
