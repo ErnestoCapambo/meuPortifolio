@@ -1,5 +1,6 @@
 import express from "express"
 import UserRoutes from "../routes/UserRoutes"
+import AuthRoutes from "../routes/AuthRoutes"
 import ProjectRoutes from "../routes/ProjectRoutes";
 import MainTitleRoutes from "../routes/MainTitleRoutes";
 import EspecialityRoutes from "../routes/EspecialityRoutes";
@@ -14,6 +15,8 @@ app.use(express.json())
 app.use(cors({
     origin: '*'
 }))
+
+app.use("/auth", AuthRoutes)
 
 app.use("/users", UserRoutes)
 
