@@ -15,6 +15,19 @@ export async function updateUser(req: Request, res: Response) {
             })
             if (user !== null) {
                 const filePath = String(user.image_path)
+
+                if (req.file?.path == undefined || req.file.path == null) {
+                    await prisma.user.update({
+                        where: { id: userId},
+                        data: {
+                            username,
+                            email,
+                            password,
+                            contact,
+                        }
+                    })
+                    return res.status(200).send()
+                }
     
                 const updateUser = fs.rm(filePath, async() => {
                     await prisma.user.update({

@@ -21,7 +21,7 @@ export async function LoginGenerateToken(req: Request, res: Response, next: Next
                 secretKey,
                 { expiresIn: '1h' },
             )
-            return res.status(200).json(token)
+            return res.status(200).json({token: token})
         }
         if (user == null) {
             return res.status(401).json({ error: 'Credenciais invalidas!' })
