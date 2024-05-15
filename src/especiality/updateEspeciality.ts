@@ -14,8 +14,20 @@ export async function updateEspeciality(req: Request, res: Response) {
                 const especiality = await prisma.especiality.findUnique({
                     where: { id: Number(especialityId) }
                 })
+                
                 if (especiality !== null) {
                     const filePath = String(especiality.img_path)
+                    if (req.file?.path == undefined || req.file.path == null) {
+                        await prisma.especiality.update({
+                            where: { id: Number(especialityId)},
+                            data: {
+                               name: name,
+                               description: description,  
+                            }
+                        })
+                        return res.status(200).json({success: 'Updated successfuly!'})
+                    }
+                    
                     const updated = fs.rm(filePath, async () => {
                         await prisma.especiality.update({
                             where: { id: Number(especialityId) },

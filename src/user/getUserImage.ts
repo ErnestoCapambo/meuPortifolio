@@ -11,6 +11,11 @@ export async function getUserImage(req: Request, res: Response) {
         const user = await prisma.user.findUnique({
             where: { id: userId }
         })
+
+        if (!user?.image_path) {
+            return res.status(404).json({error: "Image was not found."})
+        }
+
         if (user !== null) {
             return res.status(200).sendFile(String(user.image_path))
         } else {

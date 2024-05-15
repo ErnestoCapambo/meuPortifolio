@@ -11,6 +11,11 @@ export async function getEspecialitytImg(req: Request, res: Response) {
         const especiality = await prisma.especiality.findUnique({
             where: { id: Number(especialityId) }
         })
+
+        if (!especiality?.img_path) {
+            return res.status(404).json({error: "Image was not found."})
+        }
+
         if (especiality !== null) {
             return res.status(200).sendFile(String(especiality?.img_path))
         } else {
