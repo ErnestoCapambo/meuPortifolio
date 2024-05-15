@@ -31,7 +31,7 @@ app.use("/about", AboutRoutes)
 app.use("/mensages", MensageRoutes)
 
 const port = process.env.PORT
-const defaultUuid = 'adfd4633-1c05-4a13-b038-98db30f64e12'
+const defaultUuid = 'b62def04-c569-43e0-a195-74c33ae62dee'
 
 app.listen(port ?? 1500, async() => {
     const verifyUser = await prisma.user.count()
@@ -40,7 +40,7 @@ app.listen(port ?? 1500, async() => {
             data: {
                 id: defaultUuid,
                 username: 'Ernesto Capambo',
-                email: 'ernestosikilitacapambo@gmail.com',
+                email: 'ernesto@gmail.com',
                 contact: '957053820',
                 password: 'python.org777'
             }
