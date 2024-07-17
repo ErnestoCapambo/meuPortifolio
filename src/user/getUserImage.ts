@@ -9,7 +9,8 @@ export async function getUserImage(req: Request, res: Response) {
             return res.status(406).json({error: 'User id is required!'})
         }
         const user = await prisma.user.findUnique({
-            where: { id: userId }
+            where: { id: userId },
+
         })
 
         if (!user?.image_path) {

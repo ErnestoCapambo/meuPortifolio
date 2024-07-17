@@ -42,7 +42,6 @@ app.listen(port ?? 1500, async() => {
                 username: 'Ernesto Capambo',
                 email: 'ernesto@gmail.com',
                 contact: '957053820',
-                password: 'python.org777'
             }
         })
     }
