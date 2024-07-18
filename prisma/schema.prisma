@@ -14,14 +14,13 @@ datasource db {
 }
 
 model about {
-  id         Int       @id                       @default(autoincrement())
-  paragraph1 String    @db.VarChar(1500)
-  paragraph2 String    @db.VarChar(1500)
-  created_at DateTime? @default(now())
-  User_id    String
-  user       user      @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_About_User1")
+  id          Int       @id @default(autoincrement())
+  description String
+  created_at  DateTime? @default(now())
+  user_id     String
+  user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_About_User1")
 
-  @@index([User_id], map: "fk_About_User1_idx")
+  @@index([user_id], map: "fk_About_User1_idx")
 }
 
 model especiality {
@@ -30,21 +29,21 @@ model especiality {
   description String?   @db.VarChar(500)
   img_path    String?   @db.VarChar(200)
   created_at  DateTime? @default(now())
-  User_id     String
-  user        user      @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Especiality_User1")
+  user_id     String
+  user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Especiality_User1")
 
-  @@id([id, User_id])
-  @@index([User_id], map: "fk_Especiality_User1_idx")
+  @@id([id, user_id])
+  @@index([user_id], map: "fk_Especiality_User1_idx")
 }
 
 model maintitle {
   id          Int    @id @default(autoincrement())
   title       String @db.VarChar(200)
   description String @db.VarChar(500)
-  User_id     String
-  user        user   @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Maintitle_User1")
+  user_id     String
+  user        user   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Maintitle_User1")
 
-  @@index([User_id], map: "fk_Maintitle_User1_idx")
+  @@index([user_id], map: "fk_Maintitle_User1_idx")
 }
 
 model mensage {
@@ -58,21 +57,21 @@ model mensage {
 }
 
 model project {
-  id          Int       @id       @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   file_path   String?
   description String?
   created_at  DateTime? @default(now())
   updated_at  DateTime? @default(now())
-  User_id     String
-  user        user      @relation(fields: [User_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Project_User")
+  user_id     String
+  user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Project_User")
 
-  @@index([User_id], map: "fk_Project_User_idx")
+  @@index([user_id], map: "fk_Project_user_idx")
 }
 
 model user {
-  id          String        @id     @default(uuid())
-  username    String        
-  email       String        @unique(map: "email_UNIQUE")      @db.VarChar(150)
+  id          String        @id @default(uuid())
+  username    String
+  email       String        @unique(map: "email_UNIQUE") @db.VarChar(150)
   password    String        @db.VarChar(50)
   contact     String?       @db.VarChar(45)
   image_path  String?
