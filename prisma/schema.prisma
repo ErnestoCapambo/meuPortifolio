@@ -14,13 +14,14 @@ datasource db {
 }
 
 model about {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(uuid())
   description String
   created_at  DateTime? @default(now())
   user_id     String
   user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_About_User1")
 
   @@index([user_id], map: "fk_About_User1_idx")
+  @@map("About")
 }
 
 model especiality {
@@ -34,6 +35,7 @@ model especiality {
 
   @@id([id, user_id])
   @@index([user_id], map: "fk_Especiality_User1_idx")
+  @@map("Especiality")
 }
 
 model maintitle {
@@ -44,20 +46,23 @@ model maintitle {
   user        user   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Maintitle_User1")
 
   @@index([user_id], map: "fk_Maintitle_User1_idx")
+  @@map("Maintitle")
 }
 
-model mensage {
-  id               Int       @id @default(autoincrement())
+model message {
+  id               String    @id @default(uuid())
   costumer_name    String    @db.VarChar(50)
   costumer_email   String    @db.VarChar(150)
   costumer_contact String?   @db.VarChar(45)
   description      String
   created_at       DateTime? @default(now())
   seen             Boolean?  @default(false)
+
+  @@map("Message")
 }
 
 model project {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(uuid())
   file_path   String?
   description String?
   created_at  DateTime? @default(now())
@@ -72,11 +77,14 @@ model user {
   id          String        @id @default(uuid())
   username    String
   email       String        @unique(map: "email_UNIQUE") @db.VarChar(150)
-  password    String        @db.VarChar(50)
+  password    String
   contact     String?       @db.VarChar(45)
-  image_path  String?
+  image_url   String?
+  image_key   String?
   about       about[]
   especiality especiality[]
   maintitle   maintitle[]
   project     project[]
+
+  @@map("User")
 }
