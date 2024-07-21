@@ -6,10 +6,6 @@ export const UserRepository = () => {
     return prisma.user
 }
 
-export const AboutRepository = () => {
-    return prisma.about
-}
-
 export const MessageRepository = () => {
     return prisma.message
 }

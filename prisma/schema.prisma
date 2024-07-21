@@ -13,22 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model about {
-  id          String    @id @default(uuid())
-  description String
-  created_at  DateTime? @default(now())
-  user_id     String
-  user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_About_User1")
-
-  @@index([user_id], map: "fk_About_User1_idx")
-  @@map("About")
-}
-
 model especiality {
   id          String    @id @default(uuid())
   name        String    @db.VarChar(45)
   description String?   @db.VarChar(500)
-  img_path    String?   @db.VarChar(200)
+  image_url   String?
+  image_key   String?
   created_at  DateTime? @default(now())
   user_id     String
   user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Especiality_User1")
@@ -53,8 +43,8 @@ model certifications {
 
 model maintitle {
   id          String @id @default(uuid())
-  title       String @db.VarChar(200)
-  description String @db.VarChar(500)
+  title       String
+  description String
   user_id     String
   user        user   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Maintitle_User1")
 
@@ -95,7 +85,6 @@ model user {
   contact        String?          @db.VarChar(45)
   image_url      String?
   image_key      String?
-  about          about[]
   especiality    especiality[]
   maintitle      maintitle[]
   project        project[]
