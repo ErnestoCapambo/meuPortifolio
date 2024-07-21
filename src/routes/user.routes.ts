@@ -1,18 +1,26 @@
 import { Router } from "express";
 import { UpdateUserController } from "../Controllers/UserControllers/UpdateUserController";
 import { GetUserController } from "../Controllers/UserControllers/GetUserController";
+import { UpdateUserImageController } from "../Controllers/UserControllers/UpdateUserImageController";
+import { upload } from "../Config/multer";
 
 
-const router = Router()
+const routes = Router()
 
-router.get(
-    "/user/:user_id",
+routes.get(
+    "/:user_id?",
     new GetUserController().handle
 )
 
-router.put(
+routes.put(
     "/update/:userId",
     new UpdateUserController().handle
 )
 
-export { router }
+routes.put(
+    "/update-image/:user_id",
+    upload.single("file"),
+    new UpdateUserImageController().handle
+)
+
+export { routes }

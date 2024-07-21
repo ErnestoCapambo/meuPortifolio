@@ -11,7 +11,7 @@ export const AboutRepository = () => {
 }
 
 export const MessageRepository = () => {
-    return prisma.mensage
+    return prisma.message
 }
 
 export const MainTitleRepository = () => {
@@ -24,4 +24,8 @@ export const ProjectRepository = () => {
 
 export const EspecialityRepository = () => {
     return prisma.especiality
+}
+
+export const CertificationRepository = () => {
+    return prisma.certifications
 }

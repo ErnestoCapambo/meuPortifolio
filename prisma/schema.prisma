@@ -25,7 +25,7 @@ model about {
 }
 
 model especiality {
-  id          Int       @default(autoincrement())
+  id          String    @id @default(uuid())
   name        String    @db.VarChar(45)
   description String?   @db.VarChar(500)
   img_path    String?   @db.VarChar(200)
@@ -33,13 +33,26 @@ model especiality {
   user_id     String
   user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Especiality_User1")
 
-  @@id([id, user_id])
   @@index([user_id], map: "fk_Especiality_User1_idx")
   @@map("Especiality")
 }
 
+model certifications {
+  id       String  @id @default(uuid())
+  name     String
+  link     String?
+  file_url String?
+  file_key String
+  user_id  String
+
+  user user @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([user_id], map: "fk_Certifications_user_idx")
+  @@map("Certifications")
+}
+
 model maintitle {
-  id          Int    @id @default(autoincrement())
+  id          String @id @default(uuid())
   title       String @db.VarChar(200)
   description String @db.VarChar(500)
   user_id     String
@@ -71,20 +84,22 @@ model project {
   user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Project_User")
 
   @@index([user_id], map: "fk_Project_user_idx")
+  @@map("Project")
 }
 
 model user {
-  id          String        @id @default(uuid())
-  username    String
-  email       String        @unique(map: "email_UNIQUE") @db.VarChar(150)
-  password    String
-  contact     String?       @db.VarChar(45)
-  image_url   String?
-  image_key   String?
-  about       about[]
-  especiality especiality[]
-  maintitle   maintitle[]
-  project     project[]
+  id             String           @id @default(uuid())
+  username       String
+  email          String           @unique(map: "email_UNIQUE") @db.VarChar(150)
+  password       String
+  contact        String?          @db.VarChar(45)
+  image_url      String?
+  image_key      String?
+  about          about[]
+  especiality    especiality[]
+  maintitle      maintitle[]
+  project        project[]
+  certifications certifications[]
 
   @@map("User")
 }

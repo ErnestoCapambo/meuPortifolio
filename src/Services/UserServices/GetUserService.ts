@@ -13,7 +13,14 @@ export class GetUserService {
 
         if (user_id) {
             const _user = await userRepo.findUnique({
-                where: { id: user_id }
+                where: { id: user_id },
+                select: {
+                    id: true,
+                    username: true,
+                    email: true,
+                    contact: true,
+                    image_url: true,
+                }
             })
             
             if (_user == null) {

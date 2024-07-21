@@ -2,10 +2,11 @@
   "name": "portifoliobackend",
   "version": "1.2.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
+  "type": "module",
   "scripts": {
     "start": "node dist/server/server.js",
-    "dev": "tsx watch src/server/server.ts",
+    "dev": "tsx watch src/server.ts",
     "build": "tsup src",
     "seed": "tsx src/seeds/index.ts"
   },
