@@ -10,7 +10,7 @@ type MainTitleTypeRequest = {
 export class CreateMAinTitleService {
     async execute({ title, description, user_id }: MainTitleTypeRequest): Promise<void> {
         
-        const mainTitleRepo = await MainTitleRepository().create({
+        await MainTitleRepository().create({
             data: {
                 title,
                 description,
