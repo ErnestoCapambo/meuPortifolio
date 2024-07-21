@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { GetMainTitleController } from "../Controllers/GetMainTitleController";
+import { GetMainTitleController } from "../Controllers/MainTitleControllers/GetMainTitleController";
 import { UpdateMainTitleController } from "../Controllers/MainTitleControllers/UpdateMainTitleController";
 
 

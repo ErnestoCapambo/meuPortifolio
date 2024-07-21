@@ -3,6 +3,7 @@ import { CreateHabilityController } from "../Controllers/HabilityControllers/Cre
 import { upload } from "../Config/multer";
 import { GetHabilityController } from "../Controllers/HabilityControllers/GetHabilityController";
 import { UpdateHabilityController } from "../Controllers/HabilityControllers/UpdateHabilityController";
+import { DeleteHabilityController } from "../Controllers/HabilityControllers/DeleteHabilityController";
 
 
 const routes = Router()
@@ -22,6 +23,11 @@ routes.put(
 routes.get(
     "/:hability_id?",
     new GetHabilityController().handle
+)
+
+routes.delete(
+    "/delete/:hability_id/:user_id",
+    new DeleteHabilityController().handle
 )
 
 export { routes }

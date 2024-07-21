@@ -32,7 +32,7 @@ model certifications {
   name     String
   link     String?
   file_url String?
-  file_key String
+  file_key String?
   user_id  String
 
   user user @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)

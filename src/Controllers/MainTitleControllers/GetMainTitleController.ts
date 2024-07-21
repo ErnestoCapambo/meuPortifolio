@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { GetMAinTitleService } from "../Services/MainTitleServices/GetMAinTitleService";
+import { GetMAinTitleService } from "../../Services/MainTitleServices/GetMAinTitleService";
 
 
 export class GetMainTitleController {
