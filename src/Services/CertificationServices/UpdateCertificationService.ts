@@ -1,5 +1,5 @@
 import createHttpError from "http-errors";
-import { CertificationRepository, UserRepository } from "../../repository";
+import { CertificationRepository } from "../../repository";
 import { certifications } from "@prisma/client";
 
 

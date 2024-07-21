@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UpdateProjectService } from "../../Services/ProjectServices/UpdateProjectService";
+import { getUploadedFileData } from "../../helpers/getUploadedFileData";
 
 
 export class UpdateProjectController {
@@ -14,6 +15,8 @@ export class UpdateProjectController {
             project_id,
             title,
             description,
+            file_key: String(getUploadedFileData(req.file).key),
+            file_url: String(getUploadedFileData(req.file).url)
         })
 
         return res.json(result)

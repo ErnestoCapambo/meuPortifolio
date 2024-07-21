@@ -5,6 +5,7 @@ import { routes as mainTitleRoutes } from "./maintitle.routes.js";
 import { routes as projectRoutes } from "./project.routes.js";
 import { routes as habilityRoutes } from "./hability.routes.js";
 import { routes as certificationRoutes } from "./certification.routes.js";
+import { routes as messageRoutes } from "./message.routes.js"
 
 
 const routes = Router();
@@ -18,6 +19,8 @@ routes.use("/projects", projectRoutes)
 routes.use("/hability", habilityRoutes)
 
 routes.use("/certification", certificationRoutes)
+
+routes.use("/message", messageRoutes)
 
 
 export { routes }

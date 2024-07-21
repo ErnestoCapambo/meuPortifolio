@@ -54,8 +54,8 @@ model maintitle {
 
 model message {
   id               String    @id @default(uuid())
-  costumer_name    String    @db.VarChar(50)
-  costumer_email   String    @db.VarChar(150)
+  costumer_name    String
+  costumer_email   String    @unique(map: "email_Unique")
   costumer_contact String?   @db.VarChar(45)
   description      String
   created_at       DateTime? @default(now())

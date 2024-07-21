@@ -8,10 +8,12 @@ type UpdateProjectRequestType = {
 
     title?: string;
     description?: string;
+    file_url?: string;
+    file_key?: string;
 }
 
 export class UpdateProjectService {
-    async execute({ project_id, title, description }: UpdateProjectRequestType): Promise<project> {
+    async execute({ project_id, title, description, file_url, file_key }: UpdateProjectRequestType): Promise<project> {
 
         if (!(await ProjectRepository().findUnique({ where: { id: project_id } })))
             throw createHttpError(404, "Projeto não encontrado.")
@@ -20,7 +22,9 @@ export class UpdateProjectService {
             where: { id: project_id },
             data: {
                 title,
-                description
+                description,
+                file_url,
+                file_key,
             }
 
         })

@@ -20,6 +20,7 @@ routes.get(
 
 routes.put(
     "/update/:project_id",
+    upload.single('file'),
     new UpdateProjectController().handle
 )
 
