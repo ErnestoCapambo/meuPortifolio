@@ -18,8 +18,8 @@ export const ProjectRepository = () => {
     return prisma.project
 }
 
-export const EspecialityRepository = () => {
-    return prisma.especiality
+export const HabilityRepository = () => {
+    return prisma.hability
 }
 
 export const CertificationRepository = () => {

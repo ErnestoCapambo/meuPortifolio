@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model especiality {
+model hability {
   id          String    @id @default(uuid())
   name        String    @db.VarChar(45)
   description String?   @db.VarChar(500)
@@ -21,10 +21,10 @@ model especiality {
   image_key   String?
   created_at  DateTime? @default(now())
   user_id     String
-  user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Especiality_User1")
+  user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_hability_User1")
 
-  @@index([user_id], map: "fk_Especiality_User1_idx")
-  @@map("Especiality")
+  @@index([user_id], map: "fk_Hability_User1_idx")
+  @@map("Hability")
 }
 
 model certifications {
@@ -87,7 +87,7 @@ model user {
   contact        String?          @db.VarChar(45)
   image_url      String?
   image_key      String?
-  especiality    especiality[]
+  hability    hability[]
   maintitle      maintitle[]
   project        project[]
   certifications certifications[]
