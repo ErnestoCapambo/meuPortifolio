@@ -2,10 +2,10 @@
   "name": "portifoliobackend",
   "version": "1.2.0",
   "description": "",
-  "main": "dist/server.js",
+  "main": "dist/server.cjs",
   "type": "module",
   "scripts": {
-    "start": "node dist/server/server.js",
+    "start": "node dist/server.cjs",
     "dev": "tsx watch src/server.ts",
     "build": "prisma generate && tsup src",
     "seed": "tsx src/seeds/index.ts"
