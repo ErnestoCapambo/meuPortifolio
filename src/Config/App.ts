@@ -20,8 +20,19 @@ export class App {
     }
 
     middlewares() {
+        const allowedOrigins = (process.env.CORS_ORIGIN || '*')
+            .split(',')
+            .map(o => o.trim());
+
         this.app.use(cors({
-            origin: process.env.CORS_ORIGIN || '*',
+            origin: (origin, callback) => {
+                if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+                    callback(null, true);
+                } else {
+                    callback(new Error('Not allowed by CORS'));
+                }
+            },
+            credentials: true,
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
             allowedHeaders: ['Content-Type', 'Authorization']
         }));

@@ -5,6 +5,16 @@ import { generateToken, authenticateToken, AuthRequest } from '../Config/auth.js
 
 const routes = Router();
 
+// Health check - no auth needed
+routes.get('/health', async (req, res) => {
+    try {
+        const userCount = await prisma.user.count();
+        res.json({ status: 'ok', userCount });
+    } catch (error) {
+        res.status(500).json({ status: 'error', message: String(error) });
+    }
+});
+
 // Login
 routes.post('/login', async (req, res) => {
     try {
@@ -17,13 +27,13 @@ routes.post('/login', async (req, res) => {
 
         const user = await prisma.user.findUnique({ where: { email } });
         if (!user) {
-            res.status(401).json({ error: 'Invalid credentials' });
+            res.status(401).json({ error: 'User not found' });
             return;
         }
 
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) {
-            res.status(401).json({ error: 'Invalid credentials' });
+            res.status(401).json({ error: 'Wrong password' });
             return;
         }
 

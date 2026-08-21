@@ -5,10 +5,13 @@ const userSeed = new CreateUserSeeder()
 const mainTitleSeed = new CreateMainTitleSeeder()
 
 async function runSeeds (): Promise<void> {
-    await userSeed.execute()
-    await mainTitleSeed.execute()
-
-    return
+    try {
+        await userSeed.execute()
+        await mainTitleSeed.execute()
+        console.log("Seeds completed successfully")
+    } catch (error) {
+        console.error("Seed failed:", error)
+    }
 }
 
 runSeeds()
