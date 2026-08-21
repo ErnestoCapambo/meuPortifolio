@@ -1,6 +1,9 @@
+import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-const prisma = new PrismaClient()
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
+export const prisma = new PrismaClient({ adapter });
 
 export const UserRepository = () => {
     return prisma.user
@@ -24,4 +27,8 @@ export const HabilityRepository = () => {
 
 export const CertificationRepository = () => {
     return prisma.certifications
+}
+
+export const VideoRepository = () => {
+    return prisma.video
 }

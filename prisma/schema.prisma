@@ -1,16 +1,26 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+
+model user {
+  id             String           @id @default(uuid())
+  username       String
+  email          String           @unique(map: "email_UNIQUE") @db.VarChar(150)
+  password       String
+  contact        String?          @db.VarChar(45)
+  image_url      String?
+  image_key      String?
+  hability       hability[]
+  maintitle      maintitle[]
+  project        project[]
+  certifications certifications[]
+  video          video[]
+
+  @@map("User")
 }
 
 model hability {
@@ -74,23 +84,32 @@ model project {
   updated_at  DateTime? @default(now())
   user_id     String
   user        user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Project_User")
+  video       video[]
 
   @@index([user_id], map: "fk_Project_user_idx")
   @@map("Project")
 }
 
-model user {
-  id             String           @id @default(uuid())
-  username       String
-  email          String           @unique(map: "email_UNIQUE") @db.VarChar(150)
-  password       String
-  contact        String?          @db.VarChar(45)
-  image_url      String?
-  image_key      String?
-  hability    hability[]
-  maintitle      maintitle[]
-  project        project[]
-  certifications certifications[]
+model video {
+  id            String    @id @default(uuid())
+  title         String
+  description   String?
+  file_url      String
+  file_key      String?
+  file_size     Int?
+  mime_type     String?
+  thumbnail_url String?
+  published     Boolean   @default(false)
+  project_id    String?
+  experience_id String?
+  user_id       String
+  created_at    DateTime? @default(now())
+  updated_at    DateTime? @default(now())
 
-  @@map("User")
+  project project? @relation(fields: [project_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
+  user    user     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([project_id], map: "fk_Video_Project_idx")
+  @@index([user_id], map: "fk_Video_User_idx")
+  @@map("Video")
 }

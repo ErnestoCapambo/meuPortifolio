@@ -6,21 +6,19 @@ import { routes as projectRoutes } from "./project.routes.js";
 import { routes as habilityRoutes } from "./hability.routes.js";
 import { routes as certificationRoutes } from "./certification.routes.js";
 import { routes as messageRoutes } from "./message.routes.js"
+import { authRoutes } from "./auth.routes.js";
+import { videoRoutes } from "./video.routes.js";
 
 
 const routes = Router();
 
+routes.use("/auth", authRoutes)
 routes.use("/user", userRoutes)
-
 routes.use("/main_title", mainTitleRoutes)
-
 routes.use("/projects", projectRoutes)
-
 routes.use("/hability", habilityRoutes)
-
 routes.use("/certification", certificationRoutes)
-
 routes.use("/message", messageRoutes)
-
+routes.use("/videos", videoRoutes)
 
 export { routes }
