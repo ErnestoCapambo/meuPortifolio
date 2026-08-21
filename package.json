@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node dist/server/server.js",
     "dev": "tsx watch src/server.ts",
-    "build": "tsup src",
+    "build": "prisma generate && tsup src",
     "seed": "tsx src/seeds/index.ts"
   },
   "keywords": [],
@@ -23,7 +23,6 @@
     "@types/node": "^20.12.7",
     "@types/socket.io": "^3.0.2",
     "prisma": "^7.9.1",
-    "tsx": "^4.7.3",
     "typescript": "^5.4.5"
   },
   "dependencies": {
@@ -41,7 +40,7 @@
     "pino": "^9.3.1",
     "reflect-metadata": "^0.2.2",
     "socket.io": "^4.7.5",
-    "tsc": "^2.0.4",
-    "tsup": "^8.0.2"
+    "tsup": "^8.0.2",
+    "tsx": "^4.7.3"
   }
 }
