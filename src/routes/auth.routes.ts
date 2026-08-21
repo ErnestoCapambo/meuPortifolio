@@ -9,7 +9,9 @@ const routes = Router();
 routes.get('/health', async (req, res) => {
     try {
         const userCount = await prisma.user.count();
-        res.json({ status: 'ok', userCount });
+        const videoCount = await prisma.video.count();
+        const publishedCount = await prisma.video.count({ where: { published: true } });
+        res.json({ status: 'ok', userCount, videoCount, publishedCount });
     } catch (error) {
         res.status(500).json({ status: 'error', message: String(error) });
     }
